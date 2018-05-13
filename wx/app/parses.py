@@ -4,7 +4,7 @@ from requests.adapters import HTTPAdapter
 from PIL import Image
 from io import BytesIO
 import re
-from cvtest import clean_bg
+from .cvtest import clean_bg
 import numpy as np
 import logging
 from datetime import datetime 

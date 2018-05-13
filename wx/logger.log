@@ -191,3 +191,41 @@ INFO:root:2018-05-08 23:29:09 : 本次登录共请求验证码 3 次 提交表单 1 次
 ----------------------
 INFO:root:2018-05-08 23:29:10 : 获取成绩 2014510251626 
 ----------------------
+WARNING:django.request:Not Found: /get
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /wx/
+ERROR:django.request:Internal Server Error: /wx
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\python\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 28, in weixin_main
+    hashlist.sort()
+TypeError: '<' not supported between instances of 'NoneType' and 'str'
+WARNING:django.request:Not Found: /wx？das
+WARNING:django.request:Not Found: /admin
+WARNING:django.request:Not Found: /admin/login/
+ERROR:django.request:Internal Server Error: /wx/login
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 60, in login
+    if reqeust.method=='GET':
+NameError: name 'reqeust' is not defined
+WARNING:django.request:Not Found: /login
+WARNING:django.request:Not Found: /wx/wx/login
+WARNING:django.request:Not Found: /wx/wx/login
+WARNING:django.request:Not Found: /wx/wx/login
+WARNING:django.request:Not Found: /login
+WARNING:django.request:Not Found: /wx/wx/login
+WARNING:django.security.csrf:Forbidden (CSRF token missing or incorrect.): /wx/login
