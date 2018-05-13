@@ -1,0 +1,193 @@
+INFO:root:2018-05-08 23:17:49 : 获取验证码：GTJE
+INFO:root:2018-05-08 23:17:49 : 提交表单 验证码: GTJE
+INFO:root:2018-05-08 23:17:49 : 登录成功
+INFO:root:2018-05-08 23:17:49 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:17:49 : 本次登录共请求验证码 1 次 提交表单 1 次
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 48, in get
+    content=instance.getGrade()
+  File "D:\Git\wx\wx\app\parses.py", line 241, in getGrade
+    logging.info("%s : 获取成绩 %s \n----------------------"%(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),str(self.yc),str(self.sc)))
+TypeError: not all arguments converted during string formatting
+INFO:root:2018-05-08 23:18:54 : 获取验证码：GHE2
+INFO:root:2018-05-08 23:18:54 : 提交表单 验证码: GHE2
+INFO:root:2018-05-08 23:18:54 : 登录成功
+INFO:root:2018-05-08 23:18:54 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:18:54 : 本次登录共请求验证码 1 次 提交表单 1 次
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 48, in get
+    content=instance.getGrade()
+  File "D:\Git\wx\wx\app\parses.py", line 241, in getGrade
+    logging.info("%s : 获取成绩 %s \n----------------------"%(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),str(self.yc),str(self.sc)))
+TypeError: not all arguments converted during string formatting
+INFO:root:2018-05-08 23:23:04 : 获取验证码：1
+INFO:root:2018-05-08 23:23:04 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:23:04 : 获取验证码：ruA9
+INFO:root:2018-05-08 23:23:04 : 提交表单 验证码: ruA9
+INFO:root:2018-05-08 23:23:04 : 验证码错误
+INFO:root:2018-05-08 23:23:05 : 获取验证码：BAZD
+INFO:root:2018-05-08 23:23:05 : 提交表单 验证码: BAZD
+INFO:root:2018-05-08 23:23:05 : 登录成功
+INFO:root:2018-05-08 23:23:05 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:23:05 : 本次登录共请求验证码 3 次 提交表单 2 次
+----------------------
+INFO:root:2018-05-08 23:23:06 : 获取成绩 2014510251626 
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 49, in get
+    img=Image.open(content)
+NameError: name 'Image' is not defined
+INFO:root:2018-05-08 23:23:45 : 获取验证码：1
+INFO:root:2018-05-08 23:23:45 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:23:46 : 获取验证码：1
+INFO:root:2018-05-08 23:23:46 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:23:46 : 获取验证码：BRU4
+INFO:root:2018-05-08 23:23:46 : 提交表单 验证码: BRU4
+INFO:root:2018-05-08 23:23:46 : 登录成功
+INFO:root:2018-05-08 23:23:46 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:23:46 : 本次登录共请求验证码 3 次 提交表单 1 次
+----------------------
+INFO:root:2018-05-08 23:23:47 : 获取成绩 2014510251626 
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 49, in get
+    img=Image.open(content)
+  File "E:\python\lib\site-packages\PIL\Image.py", line 2477, in open
+    fp = builtins.open(filename, "rb")
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+INFO:root:2018-05-08 23:24:13 : 获取验证码：Ec3E
+INFO:root:2018-05-08 23:24:13 : 提交表单 验证码: Ec3E
+INFO:root:2018-05-08 23:24:13 : 登录成功
+INFO:root:2018-05-08 23:24:13 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:24:13 : 本次登录共请求验证码 1 次 提交表单 1 次
+----------------------
+INFO:root:2018-05-08 23:24:14 : 获取成绩 2014510251626 
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 49, in get
+    img=Image.open(content.encode('utf-8'))
+AttributeError: 'bytes' object has no attribute 'encode'
+INFO:root:2018-05-08 23:24:47 : 获取验证码：PrXS
+INFO:root:2018-05-08 23:24:47 : 提交表单 验证码: PrXS
+INFO:root:2018-05-08 23:24:47 : 验证码错误
+INFO:root:2018-05-08 23:24:48 : 获取验证码：1
+INFO:root:2018-05-08 23:24:48 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:24:48 : 获取验证码：1
+INFO:root:2018-05-08 23:24:48 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:24:48 : 获取验证码：emah
+INFO:root:2018-05-08 23:24:48 : 提交表单 验证码: emah
+INFO:root:2018-05-08 23:24:48 : 验证码错误
+INFO:root:2018-05-08 23:24:49 : 获取验证码：1
+INFO:root:2018-05-08 23:24:49 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:24:49 : 获取验证码：B9VK
+INFO:root:2018-05-08 23:24:49 : 提交表单 验证码: B9VK
+INFO:root:2018-05-08 23:24:49 : 验证码错误
+INFO:root:2018-05-08 23:24:49 : 获取验证码：1
+INFO:root:2018-05-08 23:24:49 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:24:50 : 获取验证码：1
+INFO:root:2018-05-08 23:24:50 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:24:50 : 获取验证码：4jiR
+INFO:root:2018-05-08 23:24:50 : 提交表单 验证码: 4jiR
+INFO:root:2018-05-08 23:24:50 : 验证码错误
+INFO:root:2018-05-08 23:24:51 : 获取验证码：3BSN
+INFO:root:2018-05-08 23:24:51 : 提交表单 验证码: 3BSN
+INFO:root:2018-05-08 23:24:51 : 登录成功
+INFO:root:2018-05-08 23:24:51 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:24:51 : 本次登录共请求验证码 10 次 提交表单 5 次
+----------------------
+INFO:root:2018-05-08 23:24:52 : 获取成绩 2014510251626 
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 49, in get
+    img=Image.open(content.encode('utf-8'))
+AttributeError: 'bytes' object has no attribute 'encode'
+INFO:root:2018-05-08 23:25:22 : 获取验证码：1
+INFO:root:2018-05-08 23:25:22 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:25:23 : 获取验证码：KHVJ
+INFO:root:2018-05-08 23:25:23 : 提交表单 验证码: KHVJ
+INFO:root:2018-05-08 23:25:23 : 登录成功
+INFO:root:2018-05-08 23:25:23 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:25:23 : 本次登录共请求验证码 2 次 提交表单 1 次
+----------------------
+INFO:root:2018-05-08 23:25:24 : 获取成绩 2014510251626 
+----------------------
+ERROR:django.request:Internal Server Error: /wx/get/
+Traceback (most recent call last):
+  File "E:\python\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\python\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Git\wx\wx\app\views.py", line 49, in get
+    img=Image.open(content)
+  File "E:\python\lib\site-packages\PIL\Image.py", line 2477, in open
+    fp = builtins.open(filename, "rb")
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+INFO:root:2018-05-08 23:26:37 : 获取验证码：FUGC
+INFO:root:2018-05-08 23:26:37 : 提交表单 验证码: FUGC
+INFO:root:2018-05-08 23:26:37 : 验证码错误
+INFO:root:2018-05-08 23:26:37 : 获取验证码：HKZ2
+INFO:root:2018-05-08 23:26:37 : 提交表单 验证码: HKZ2
+INFO:root:2018-05-08 23:26:38 : 登录成功
+INFO:root:2018-05-08 23:26:38 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:26:38 : 本次登录共请求验证码 2 次 提交表单 2 次
+----------------------
+INFO:root:2018-05-08 23:26:38 : 获取成绩 2014510251626 
+----------------------
+INFO:root:2018-05-08 23:29:08 : 获取验证码：1
+INFO:root:2018-05-08 23:29:08 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:29:08 : 获取验证码：1
+INFO:root:2018-05-08 23:29:08 : 重新加载验证码 (并没有提交表单)
+INFO:root:2018-05-08 23:29:09 : 获取验证码：GVNN
+INFO:root:2018-05-08 23:29:09 : 提交表单 验证码: GVNN
+INFO:root:2018-05-08 23:29:09 : 登录成功
+INFO:root:2018-05-08 23:29:09 : 缓存cookie: 2014510251626
+INFO:root:2018-05-08 23:29:09 : 本次登录共请求验证码 3 次 提交表单 1 次
+----------------------
+INFO:root:2018-05-08 23:29:10 : 获取成绩 2014510251626 
+----------------------
