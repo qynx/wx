@@ -15,6 +15,32 @@ from io import BytesIO
 import xml.etree.ElementTree as ET
 import time
 import pymysql
+import json
+import requests
+
+sys.path.append('..')
+from wxsys import getinfo
+
+replyxml='''
+        <xml>
+        <ToUserName><![CDATA[{}]]></ToUserName>
+        <FromUserName><![CDATA[{}]]></FromUserName>
+        <CreateTime>{}</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA[{}]]></Content>
+        </xml>
+        '''
+
+imgxml='''
+<xml>
+<ToUserName><![CDATA[{}]]></ToUserName>
+<FromUserName><![CDATA[{}]]></FromUserName>
+<CreateTime>{}</CreateTime>
+<MsgType><![CDATA[image]]></MsgType>
+<Image><MediaId><![CDATA[{}]]></MediaId></Image>
+</xml>
+'''
+
 @csrf_exempt
 def weixin_main(request):
     if request.method == "GET":
@@ -41,63 +67,151 @@ def weixin_main(request):
         touser=xmldata.find('FromUserName').text
         #print(request.session.get('touser',None))
         
-        conn=pymysql.connect(host='127.0.0.1',user='root',password='287830',database='wx',charset='utf8')
-        cursor=conn.cursor()
-        sql='select * from state where openid="%s"'%(touser)
-        cursor.execute(sql)
-        results=cursor.fetchone()
-        conn.commit()
-        conn.close()
-        if results[1]=='tobebind':
-            send=bindself(xmldata)
-            return HttpResponse(send,content_type="application/xml")
+        if xmldata.find('MsgType').text=='text':
+            conn=pymysql.connect(host='127.0.0.1',user='root',password='287830',database='wx',charset='utf8')
+            cursor=conn.cursor()
+            sql='select * from state where openid="%s"'%(touser)
+            cursor.execute(sql)
+            results=cursor.fetchone()
+            conn.commit()
+        
+            if not results:
+                sql='insert into state values("%s","%s")'%(touser,'0')
+                cursor.execute(sql)
+                conn.commit()
+                conn.close()
 
-        if xmldata.find('MsgType').text=='event':
-            if xmldata.find('Event').text=='click'.upper():
+                reply=testreply(touser,xmldata.find('ToUserName').text,'欢迎')
+                return HttpResponse(reply,content_type="applcation/xml")
+
+            elif results[1]=='tobebind':
+                send=bindself(xmldata)
+                return HttpResponse(send,content_type="application/xml")
+
+        elif xmldata.find('MsgType').text=='event':  
+            if xmldata.find('Event').text=='click'.upper():  
                 if xmldata.find('EventKey').text=='bind':
 
-                    request.session['touser']='tobebind'
+                    #request.session['touser']='tobebind'
                     touser=xmldata.find('FromUserName').text
                     fromuser=xmldata.find('ToUserName').text
 
-
+                    #用户准备进入绑定状态，需要修改数据库状态 如果用户第一次进入，数据库没有相应记录需要先插入记录
                     conn=pymysql.connect(host='127.0.0.1',user='root',password='287830',database='wx',charset='utf8')
                     cursor=conn.cursor()
                     sql='select * from state where openid="%s"'%(touser)                    
                     cursor.execute(sql)
+
                     if cursor.fetchone()==None:
 
                         sql='insert into state values("%s","%s")'%(touser,'tobebind')
                         cursor.execute(sql)
-                        print('插入')
+                        #print('插入')
+                    
                     else:
                         sql='update state set states ="tobebind" where openid="%s"'%(touser)
                         cursor.execute(sql)
 
                     conn.commit()
                     conn.close()
+                    
                     reply=makebindreply(touser,fromuser)
+                    
+                    #print(reply)
+                    
+                    return HttpResponse(reply,content_type="application/xml")
+                
+                elif xmldata.find('EventKey').text=='grade_get':
+
+                    user=xmldata.find('FromUserName').text  #用户id
+                    platform=xmldata.find('ToUserName').text #平台
+
+                    reply = gradeGet(user,platform)
                     print(reply)
                     return HttpResponse(reply,content_type="application/xml")
+
     touser=xmldata.find('FromUserName').text
     fromuser=xmldata.find('ToUserName').text
     reply=testreply(touser,fromuser)
     #print(reply)
     return HttpResponse(reply,content_type="application/xml")
 
+#grade get
+def gradeGet(user,platform):
+
+    '''
+    user openid
+    platform plat
+    获取成绩
+    '''
+    
+    #查询是否绑定
+    conn=pymysql.connect(host='127.0.0.1',user='root',password='287830',database='wx',charset='utf8')
+    cursor=conn.cursor()
+    sql='select * from user where openid = "%s"'%(user)
+    cursor.execute(sql)
+
+    userrecord=cursor.fetchone()
+
+    if userrecord==None:
+        return replyxml.format(user,platform,int(time.time()),"还未绑定 , 绑定后再来查询吧！")
+
+
+    instance=Login(userrecord[0],userrecord[1])
+
+    if instance.login()==0:
+
+        response=instance.getGrade() #return response content of Image object
+       
+        g=getinfo.Get()
+        access=g.loadaccesstoken()
+        print(access)
+        imgurl='https://api.weixin.qq.com/cgi-bin/media/upload?access_token={}&type=image'.format(access)
+
+        filename=userrecord[0]+'.png'
+        files={'attachement_file':(filename,response,'image/png',{})}
+        r=requests.post(imgurl,files=files)
+        print(r.text)
+        jsondata=json.loads(r.text)
+
+        media_id=jsondata['media_id']
+        print(media_id)
+        return imgxml.format(user,platform,int(time.time()),media_id)
+    else:
+        return replyxml.format(user,platform.int(time.time()),"获取失败，后台抢修中。。。")
+
+
+    
+
 #bind
 def bindself(xmldata):
-    print("bindself ...")
+    #print("bindself ...")
     content=xmldata.find('Content').text
     content=content.split('\n')
-    usernumber=content[0]
-    password=content[1]
     touser=xmldata.find('FromUserName').text
     fromuser=xmldata.find('ToUserName').text
+   
+    try:
+        usernumber=content[0]
+        password=content[1]
+    except Exception as e:
+        conn=pymysql.connect(host='127.0.0.1',user='root',password='287830',database='wx',charset='utf8')
+        cursor=conn.cursor()
+        sql='update state set states = 0 where openid ="%s"'%(touser)
+        cursor.execute(sql)
+        conn.commit()
+        conn.close()
+        return errorreply(touser,fromuser,"输入格式有错，账号密码要换行。。\n点击绑定 重新绑定")
+
+    touser=xmldata.find('FromUserName').text
+    fromuser=xmldata.find('ToUserName').text
+
     instance=Login(usernumber,password)
 
     result=instance.bind()
-    print(result)
+    #print(result)
+    conn=pymysql.connect(host='127.0.0.1',user='root',password='287830',database='wx',charset='utf8')
+    cursor=conn.cursor()
     if result==0:
         
        
@@ -111,8 +225,13 @@ def bindself(xmldata):
         conn.close()
 
         result_msg='绑定成功'
+
     else:
-        reuslt_msg='绑定失败（账号或密码不正确）'
+        sql='update state set states = 0 where openid ="%s"'%(touser)
+        cursor.execute(sql)
+        conn.commit()
+        conn.close()
+        result_msg='绑定失败（账号或密码不正确）\n已自动退出预备登录状态\n重新绑定需要再次点击绑定'
 
     xmlform='''
         <xml>
@@ -124,7 +243,8 @@ def bindself(xmldata):
         </xml>
         '''
     return xmlform.format(touser,fromuser,int(time.time()),result_msg)
-def testreply(touser,fromuser):
+
+def testreply(touser,fromuser,msg='新的功能有待完善'):
     xmlform='''
         <xml>
         <ToUserName><![CDATA[{}]]></ToUserName>
@@ -134,9 +254,15 @@ def testreply(touser,fromuser):
         <Content><![CDATA[{}]]></Content>
         </xml>
         '''
-    return xmlform.format(touser,fromuser,int(time.time()),'GG了')
+    return xmlform.format(touser,fromuser,int(time.time()),'新的功能有待完善')
+
+
+def errorreply(touser,fromuser,errormsg):
+
+    return replyxml.format(touser,fromuser,int(time.time()),errormsg)
 
 def makebindreply(touser,fromuser):
+    
     xmlform='''
         <xml>
         <ToUserName><![CDATA[{}]]></ToUserName>
