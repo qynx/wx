@@ -229,3 +229,4 @@ WARNING:django.request:Not Found: /wx/wx/login
 WARNING:django.request:Not Found: /login
 WARNING:django.request:Not Found: /wx/wx/login
 WARNING:django.security.csrf:Forbidden (CSRF token missing or incorrect.): /wx/login
+WARNING:django.request:Not Found: /
