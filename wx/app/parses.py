@@ -9,14 +9,9 @@ import numpy as np
 import logging
 from datetime import datetime 
 import pickle
-
+from .urlconfig import config as config
 logging.basicConfig(filename='logger.log',level=logging.INFO)
-config={
-		'yzmurl':'http://58.20.34.197:10089/jwweb/sys/ValidateCode.aspx',
-		'loginurl':'http://58.20.34.197:10089/jwweb/_data/login_new.aspx',
-		'gradeurl':'http://58.20.34.197:10089/jwweb/xscj/Stu_MyScore_rpt.aspx',
-		'gradeurl_prefix':'http://58.20.34.197:10089/jwweb/xscj/',
-	}
+
 
 class Login:
 	def __init__(self,number,password,yzm='1234',cofig=config):
@@ -26,7 +21,7 @@ class Login:
 			"__VIEWSTATE":	"",
 			"dsdsdsdsdxcxdfgfg":	"",
 			"fgfggfdgtyuuyyuuckjg":	"",
-			"pcInfo":	"Mozilla/5.0+(Windows+NT+6.3;+WOW64;+rv:59.0)+Gecko/20100101+Firefox/59.0Windows+NT+6.3;+WOW645.0+(Windows)+SN:NULL",
+			"pcInfo":	"",
 			"Sel_Type":	"STU",
 			"txt_asmcdefsddsd":self.number,
 			"txt_pewerwedsdfsdff":"",	
@@ -34,9 +29,9 @@ class Login:
 			"typeName":"%D1%A7%C9%FA",
 		}
 		self.headers={
-			"Host":	"58.20.34.197:10089",
-			"Referer":"http://58.20.34.197:10089/jwweb/_data/login_new.aspx",
-			"User-Agent":	"Mozilla/5.0 (Windows NT 6.3; W…) Gecko/20100101 Firefox/59.0".encode('utf-8'),
+			"Host":	"",
+			"Referer":"",
+			"User-Agent":	"".encode('utf-8'),
 		}
 		self.config=config
 		self.s = requests.session()
@@ -77,8 +72,8 @@ class Login:
 	def loadyzm(self):
 		self.yc+=1
 		headers={
-			"Referer":	"http://58.20.34.197:10089/jwweb/_data/login_new.aspx",
-			"User-Agent":	"Mozilla/5.0 (Windows NT 6.3; W…) Gecko/20100101 Firefox/59.0".encode('utf-8'),
+			"Referer":	"",
+			"User-Agent":	"".encode('utf-8'),
 		}
 		url=self.config['yzmurl']
 		#print("loading the check image...")
@@ -225,7 +220,7 @@ class Login:
 
 	def getGrade(self):
 		header=self.headers
-		header['Referer']='http://58.20.34.197:10089/jwweb/xscj/Stu_MyScore.aspx'
+		header['Referer']=''
 
 		form={
 		"btn_search":"%BC%EC%CB%F7",
@@ -255,7 +250,7 @@ class Login:
 
 if __name__=='__main__':
 	
-	instance=Login('2014510251626','54321','t4p4',config)
+	instance=Login('','','t4p4',config)
 	'''
 	instance.chkpwd()
 	print(instance.dsdsdsdsdxcxdfgfg)
@@ -276,5 +271,5 @@ if __name__=='__main__':
 
 
 
-xuehao='2014510250710'
+
 
